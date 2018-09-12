@@ -1,3 +1,3 @@
-#Blackjack!
-##Made with node js and socket.io
+# Blackjack!
+## Made with node js and socket.io
 In progres...

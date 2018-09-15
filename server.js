@@ -50,7 +50,7 @@ io.on('connection', function(socket) {
         console.log(playerlist);
         console.log(playerlist.length);
         if(playerlist.length > 1) {
-            console.log("hooorayy")
+            console.log("hooorayy");
             var cdt = 20;
             updateStatus("Starting...");
         }

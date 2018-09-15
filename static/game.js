@@ -12,13 +12,23 @@ $(function(){
         "car",
         "dab",
         "kek",
-        "cheater"
+        "cheater",
+        "pootis",
+        "spy",
+        "onii"
     ];
     const rnam_second = [
         "destroyer",
         "smasher",
         "killer",
-        "assasin"
+        "assasin",
+        "sandranaitor",
+        "backstabber",
+        "fucker",
+        "sucker",
+        "builder",
+        "chan",
+        "sapper"
     ];
     const rnam_third = [
         "696",
@@ -30,7 +40,10 @@ $(function(){
         "333",
         "123",
         "321",
-        "080"
+        "080",
+        "000",
+        "021",
+        "420"
     ]
     var socket = io.connect();
     var randomnameone = rnam_first[Math.floor(Math.random() * rnam_first.length)];
@@ -60,5 +73,8 @@ $(function(){
         $players.html(html);
         ouhtml = i+' Usuarios online';
         $ou.html(ouhtml);
+    });
+    socket.on('log', function(data){
+        console.log("[SERVER-LOG] " + data);
     })
 });

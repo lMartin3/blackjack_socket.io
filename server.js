@@ -47,9 +47,21 @@ io.on('connection', function(socket) {
             return;
         }
 		playerlist.push(socket.nickname);
-		updateUsernames();
+        updateUsernames();
+        console.log(playerlist.length);
+        if(playerlist.lenght > 1) {
+            console.log("hooorayy")
+            cdt = 20;
+            while(cdt>=0) {
+                plzLog("testing");
+            }
+        }
 	})
 	function updateUsernames() {
 		io.sockets.emit('refresh_players', playerlist);
     }
+    function plzLog(data) {
+        io.sockets.emit('log', data);
+    }
+    
 });

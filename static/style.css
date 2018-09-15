@@ -21,3 +21,9 @@ h1 {
 li {
     
 }
+.container {
+
+}
+.container game {
+    display: none;
+}

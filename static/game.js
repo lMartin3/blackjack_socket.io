@@ -1,7 +1,11 @@
 $(function(){
+    var $loginform = $('#loginform');
+    var $username = $('#username');
+    var $gameform = $('#gameform');
     var $players = $('#players');
     var $ou = $('#ou');
     var $status = $('#status');
+    
     const rnam_first =[
         "potato",
         "earth",
@@ -75,14 +79,22 @@ $(function(){
     var randomnametwo = rnam_second[Math.floor(Math.random() * rnam_second.length)];
     var randomnamethree = rnam_third[Math.floor(Math.random() * rnam_third.length)];
     var rname = randomnameone + "_" + randomnametwo + "_" + randomnamethree;
-    function askNickname() {
-        nickname = prompt("Please enter your nickname:", rname);
-    }
-    askNickname();
+
+
+    $loginform.submit(function(e){
+        var socket = io.connect();
+        e.preventDefault();
+        socket.emit('new user', $username.val());
+        $loginform.hide();
+        $gameform.show();
+        $username.val('');
+    });
+
+
+
     if(nickname==null || nickname=="") {
         nickname = rname;
     }
-    var socket = io.connect();
     socket.emit('new_player', nickname);
     socket.on('reject', function(data) {
         console.log("lol u rejected");
@@ -107,6 +119,6 @@ $(function(){
         $status.html(html);
     })
     socket.on('start_game', function() {
-        console.log("Che esto funcionó re bien")
+        console.log("Che esto funcionó re bien");
     })
 });

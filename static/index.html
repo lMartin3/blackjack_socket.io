@@ -8,7 +8,13 @@
     <script src="game.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container login" id="loginform">
+            <label>Ingresa tu nombre de usuario</label>
+            <textarea class="form-control" id="username" type="submit" rows=1></textarea>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Entrar" id="submitbutton"/>
+    </div>
+    <div class="container game" id="gameform">
         <h1>Blackjack!</h1><br>
         <h2 id="status">Status: Waiting for players...</h2>
         <div class="playerlist">

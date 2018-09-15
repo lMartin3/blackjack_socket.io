@@ -46,9 +46,10 @@ io.on('connection', function(socket) {
             socket.disconnect();
             return;
         }
+
 		playerlist.push(socket.nickname);
         updateUsernames();
-        console.log(playerlist.length);
+        console.log(playerlist.lenght);
         if(playerlist.lenght > 1) {
             console.log("hooorayy")
             cdt = 20;

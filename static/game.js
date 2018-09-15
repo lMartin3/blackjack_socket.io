@@ -71,7 +71,6 @@ $(function(){
         "420",
         "111"
     ]
-    var socket = io.connect();
     var randomnameone = rnam_first[Math.floor(Math.random() * rnam_first.length)];
     var randomnametwo = rnam_second[Math.floor(Math.random() * rnam_second.length)];
     var randomnamethree = rnam_third[Math.floor(Math.random() * rnam_third.length)];
@@ -83,12 +82,11 @@ $(function(){
     if(nickname==null || nickname=="") {
         nickname = rname;
     }
-    console.log("2:" + nickname);
-    console.log(rname);
+    var socket = io.connect();
     socket.emit('new_player', nickname);
     socket.on('reject', function(data) {
         console.log("lol u rejected");
-        alert("Connection ended by server");
+        alert("Kicked by Server System" +  "\nReason: " + data);
     });
     socket.on('refresh_players', function(data){
         console.log("Refreshing players...")
@@ -104,6 +102,7 @@ $(function(){
         console.log("[SERVER-LOG] " + data);
     })
     socket.on('update_status', function(data) {
+        console.log("Satuts update: " + data)
         var html = 'Status: ' + data;
         $status.html(html);
     })

@@ -21,59 +21,30 @@ server.listen(3000, function() {
 });
 
 io.on('connection', function(socket) {
-    console.log("new connection from " + socket.ip);
-
+    //console.log("new connection from " + socket.ip);
     socket.on('disconnect', function(data) {
-        console.log('Disconected: s sockets connected');
         playerlist.splice(playerlist.indexOf(socket.nickname), 1);
         updateUsernames();
-        console.log("-"+socket.nickname)
-    });
-
-    socket.on('algo', function(data) {
-        if(data=="algo") {
-        }
     });
 
     socket.on('new_player', function(data) {
+        socket.emit('log', "Bienvenido");
 		//callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
         socket.nickname = data;
         if(data=="sandra") {
-            socket.emit('reject');
+            socket.emit('reject', "Game in progress");
             socket.disconnect();
             return;
         }
         playerlist.push(socket.nickname);
-        console.log("+"+socket.nickname);
         updateUsernames();
-        
-        console.log(playerlist);
-        console.log(playerlist.length);
         if(playerlist.length > 1) {
-            console.log("hooorayy");
-            var cdt = 20;
-            var now = new Date().getTime();
-            var countDownDate = new Date(now+ 20*1000);
-            // Update the count down every 1 second
-            var x = setInterval(function() {
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-                // Time calculations for days, hours, minutes and seconds
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                // Display the result in the element with id="demo"
-                // If the count down is finished, write some text 
-                
-                if (distance < 0) {
-                    clearInterval(x);
-                    console.log("AL FIN");
-                }
-                cdt = seconds;
-                updateStatus("SSsStarting... " + cdt + " seconds left!");
-                
-        }, 1000);
-    }
-});
+            startCooldown();
+        }
+    });
+
     function updateStatus(status) {
+        console.log("Sending status update: " + status);
         io.sockets.emit('update_status', status);
     }
 	function updateUsernames() {
@@ -82,5 +53,23 @@ io.on('connection', function(socket) {
     function plzLog(data) {
         io.sockets.emit('log', data);
     }
-    
+
+
+    function startCooldown() {
+        bj_status = "starting";
+        var cdt = 20;
+        var x = setInterval(function() {
+            if(playerlist.length>1) {
+                updateStatus("Starting... " + "[" + cdt + "]");
+                if(cdt<=0) {
+                    clearInterval(x);
+                    bj_status="ingame";
+                }
+                cdt--;
+            } else {
+                updateStatus("Waiting for players...");
+                bj_status="waiting";
+            }
+        }, 1000);
+    }   
 });

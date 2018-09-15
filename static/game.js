@@ -1,6 +1,7 @@
 $(function(){
     var $players = $('#players');
     var $ou = $('#ou');
+    var $status = $('#status');
     const rnam_first =[
         "potato",
         "earth",
@@ -101,5 +102,9 @@ $(function(){
     });
     socket.on('log', function(data){
         console.log("[SERVER-LOG] " + data);
+    })
+    socket.on('update_status', function(data) {
+        var html = 'Status: ' + data;
+        $status.html(html);
     })
 });

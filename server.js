@@ -51,12 +51,13 @@ io.on('connection', function(socket) {
         console.log(playerlist.length);
         if(playerlist.length > 1) {
             console.log("hooorayy")
-            cdt = 20;
-            while(cdt>=0) {
-                plzLog("testing");
-            }
+            var cdt = 20;
+            updateStatus("Starting...");
         }
-	})
+    });
+    function updateStatus(status) {
+        io.sockets.emit('update_status', status);
+    }
 	function updateUsernames() {
 		io.sockets.emit('refresh_players', playerlist);
     }

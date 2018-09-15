@@ -53,7 +53,9 @@ io.on('connection', function(socket) {
     function plzLog(data) {
         io.sockets.emit('log', data);
     }
-
+    function startgame() {
+        io.sockets.emit('start_game');
+    }    
 
     function startCooldown() {
         bj_status = "starting";
@@ -65,6 +67,7 @@ io.on('connection', function(socket) {
                     clearInterval(x);
                     bj_status="ingame";
                     updateStatus("In game");
+                    startgame();
                 }
                 cdt--;
             } else {

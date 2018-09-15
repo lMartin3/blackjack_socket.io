@@ -106,4 +106,7 @@ $(function(){
         var html = 'Status: ' + data;
         $status.html(html);
     })
+    socket.on('start_game', function() {
+        console.log("Che esto funcionó re bien")
+    })
 });

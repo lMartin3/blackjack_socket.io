@@ -18,12 +18,42 @@ h1 {
     background-color: #efefef;
     text-align: center;
 }
-li {
-    
-}
 .container {
+    /*margin: 5px 100px 15px 20px;*/
+    /*border: 2px #383735 solid; */
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    vertical-align: auto;
+    background-color: #f0f0f0; /*#e5e5dc; */
+    border: 10px #000000;
+    margin: 100px auto;
+    position: relative;
+    text-align: center;
 
 }
-.container game {
-    display: none;
+.txtinput {
+    font-size: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 95%;
+    height: 40px;
+    padding: 10px;
+    margin: 10px;
+    resize: none;
+    border-radius: 10px;
+    transition: font-size 0.5s, border 0.5s, border-radius 0.5s, height 0.5s;
+}
+.txtinput:hover {
+    font-size: 0.9em;
+    border: 3px solid #445555;
+    border-radius: 0px;
+    height: 50px;
+}
+.txtinput:focus {
+    border: 3px solid #445555;
+    border-radius: 0px;
+    font-size: 1em;
+    height: 80px
 }

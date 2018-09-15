@@ -75,27 +75,21 @@ $(function(){
         "420",
         "111"
     ]
+    $gameform.hide();
     var randomnameone = rnam_first[Math.floor(Math.random() * rnam_first.length)];
     var randomnametwo = rnam_second[Math.floor(Math.random() * rnam_second.length)];
     var randomnamethree = rnam_third[Math.floor(Math.random() * rnam_third.length)];
     var rname = randomnameone + "_" + randomnametwo + "_" + randomnamethree;
-
-
-    $loginform.submit(function(e){
-        var socket = io.connect();
-        e.preventDefault();
-        socket.emit('new user', $username.val());
+    $username.val(rname);
+    var socket = io.connect();
+    document.getElementById("joinGame").addEventListener("click", function(){
+        console.log($username.val());
+        socket.emit('new_player', $username.val());
         $loginform.hide();
         $gameform.show();
         $username.val('');
     });
 
-
-
-    if(nickname==null || nickname=="") {
-        nickname = rname;
-    }
-    socket.emit('new_player', nickname);
     socket.on('reject', function(data) {
         console.log("lol u rejected");
         alert("Kicked by Server System" +  "\nReason: " + data);

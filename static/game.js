@@ -84,13 +84,13 @@ $(function(){
     var socket = io.connect();
     document.getElementById("joinGame").addEventListener("click", function(){
         console.log($username.val());
-        socket.emit('new_player', $username.val()) {
+        socket.emit('new_player', $username.val(), function(data) {
             if(data){
                 $loginform.hide();
                 $gameform.show();
                 $username.val('');
             }
-        }
+        })
     });
 
     socket.on('reject', function(data) {

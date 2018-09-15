@@ -1,4 +1,4 @@
-//blackjack-socket.io coded by lMartin3
+//blackjack-socket.io coded by lMartin3 and MQRLZ
 //SERVERSIDe
 const express = require('express');
 const http = require('http');
@@ -47,9 +47,10 @@ io.on('connection', function(socket) {
             socket.disconnect();
             return;
         }
+
 		playerlist.push(socket.nickname);
         updateUsernames();
-        console.log(playerlist.length);
+        console.log(playerlist.lenght);
         if(playerlist.lenght > 1) {
             console.log("hooorayy")
             cdt = 20;

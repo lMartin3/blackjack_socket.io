@@ -71,7 +71,7 @@ $(function(){
             html += '<li class="list-group-item">'+data[i]+'</li>';
         }
         $players.html(html);
-        ouhtml = i+' Usuarios online';
+        ouhtml = i+' Players online';
         $ou.html(ouhtml);
     });
     socket.on('log', function(data){

@@ -23,7 +23,9 @@ $(function(){
         "nisman",
         "liberman",
         "decaroli",
-        "cora"
+        "cora",
+        "leaderman",
+        "lilita"
     ];
     const rnam_second = [
         "destroyer",
@@ -40,7 +42,11 @@ $(function(){
         "corrupter",
         "uwuer",
         "player",
-        "hertz"
+        "hertz",
+        "thepro",
+        "volleyballkicker",
+        "passtheball",
+        "carrió"
     ];
     const rnam_third = [
         "696",

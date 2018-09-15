@@ -57,3 +57,238 @@ h1 {
     font-size: 1em;
     height: 80px
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn {
+    border: 0 none;
+    border-radius: 6px 6px 6px 6px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    font-size: 1.125em;
+    font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    margin: 0 0.625em;
+    outline: 0 none;
+    text-decoration: none;
+    line-height: inherit;
+    padding: 0.875em 1.125em;
+    margin-bottom: 0.625em;
+  }
+  .btn:hover {
+    color: #fff;
+  }
+  
+  .btn.btn {
+    background: #445555;
+  }
+  .btn.btn:hover {
+    background: #5b7171;
+  }
+  .btn.btn.border {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #445555;
+  }
+  .btn.btn.border:hover {
+    box-shadow: 0 0 0 3px #5b7171;
+  }
+  .btn.btn.small {
+    padding: 0.75em 0.625em;
+    font-size: 0.875em;
+  }
+  .btn.btn.tiny {
+    padding: 0.375em 0.5em;
+    font-size: 0.75em;
+  }
+  
+  .btn.primary {
+    background: #DD4B39;
+  }
+  .btn.primary:hover {
+    background: #e47365;
+  }
+  .btn.primary.border {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #DD4B39;
+  }
+  .btn.primary.border:hover {
+    box-shadow: 0 0 0 3px #e47365;
+  }
+  .btn.primary.small {
+    padding: 0.75em 0.625em;
+    font-size: 0.875em;
+  }
+  .btn.primary.tiny {
+    padding: 0.375em 0.5em;
+    font-size: 0.75em;
+  }
+  
+  .btn.secondary {
+    background: #2795b6;
+  }
+  .btn.secondary:hover {
+    background: #3bb1d5;
+  }
+  .btn.secondary.border {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #2795b6;
+  }
+  .btn.secondary.border:hover {
+    box-shadow: 0 0 0 3px #3bb1d5;
+  }
+  .btn.secondary.small {
+    padding: 0.75em 0.625em;
+    font-size: 0.875em;
+  }
+  .btn.secondary.tiny {
+    padding: 0.375em 0.5em;
+    font-size: 0.75em;
+  }
+  
+  .btn.quiet {
+    background: #d8d8d8;
+  }
+  .btn.quiet:hover {
+    background: #f1f1f1;
+  }
+  .btn.quiet.border {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #d8d8d8;
+  }
+  .btn.quiet.border:hover {
+    box-shadow: 0 0 0 3px #f1f1f1;
+  }
+  .btn.quiet.small {
+    padding: 0.75em 0.625em;
+    font-size: 0.875em;
+  }
+  .btn.quiet.tiny {
+    padding: 0.375em 0.5em;
+    font-size: 0.75em;
+  }
+  
+  .btn.neutral {
+    background: #777777;
+  }
+  .btn.neutral:hover {
+    background: #919191;
+  }
+  .btn.neutral.border {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #777777;
+  }
+  .btn.neutral.border:hover {
+    box-shadow: 0 0 0 3px #919191;
+  }
+  .btn.neutral.small {
+    padding: 0.75em 0.625em;
+    font-size: 0.875em;
+  }
+  .btn.neutral.tiny {
+    padding: 0.375em 0.5em;
+    font-size: 0.75em;
+  }
+  

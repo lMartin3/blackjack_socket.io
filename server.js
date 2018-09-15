@@ -4,6 +4,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
+const perón = "uwu";
 
 var app = express();
 var server = http.Server(app);

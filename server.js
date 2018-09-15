@@ -64,6 +64,7 @@ io.on('connection', function(socket) {
                 if(cdt<=0) {
                     clearInterval(x);
                     bj_status="ingame";
+                    updateStatus("In game");
                 }
                 cdt--;
             } else {

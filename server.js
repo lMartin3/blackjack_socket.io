@@ -52,7 +52,7 @@ io.on('connection', function(socket) {
         if(playerlist.length > 1) {
             console.log("hooorayy");
             var cdt = 20;
-            updateStatus("Starting..." + cdt + "seconds left!");
+            updateStatus("Starting..." + cdt + " seconds left!");
         }
     });
     function updateStatus(status) {

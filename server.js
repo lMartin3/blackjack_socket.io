@@ -53,7 +53,7 @@ io.on('connection', function(socket) {
             console.log("hooorayy");
             var cdt = 20;
             var now = new Date().getTime();
-            var countDownDate = new Date(Date.getTime() + 20*1000);
+            var countDownDate = new Date(now+ 20*1000);
             // Update the count down every 1 second
             var x = setInterval(function() {
                 // Find the distance between now and the count down date
@@ -65,11 +65,12 @@ io.on('connection', function(socket) {
                 
                 if (distance < 0) {
                     clearInterval(x);
+                    console.log("AL FIN");
                 }
-                cdt = distance;
-                updateStatus("Starting... " + cdt + " seconds left!");
+                cdt = seconds;
+                updateStatus("SSsStarting... " + cdt + " seconds left!");
                 
-        });
+        }, 1000);
     }
 });
     function updateStatus(status) {

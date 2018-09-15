@@ -25,8 +25,9 @@ io.on('connection', function(socket) {
 
     socket.on('disconnect', function(data) {
         console.log('Disconected: s sockets connected');
-        playerlist.splice(playerlist.indexOf(socket.username), 1);
+        playerlist.splice(playerlist.indexOf(socket.nickname), 1);
         updateUsernames();
+        console.log("-"+socket.nickname)
     });
 
     socket.on('algo', function(data) {
@@ -42,7 +43,8 @@ io.on('connection', function(socket) {
             socket.disconnect();
             return;
         }
-		playerlist.push(socket.nickname);
+        playerlist.push(socket.nickname);
+        console.log("+"+socket.nickname);
         updateUsernames();
         
         console.log(playerlist);

@@ -18,7 +18,12 @@ $(function(){
         "onii",
         "mongol",
         "peron",
-        "ali"
+        "ali",
+        "souza",
+        "nisman",
+        "liberman",
+        "decaroli",
+        "cora"
     ];
     const rnam_second = [
         "destroyer",
@@ -34,7 +39,8 @@ $(function(){
         "sapper",
         "corrupter",
         "uwuer",
-        "player"
+        "player",
+        "hertz"
     ];
     const rnam_third = [
         "696",

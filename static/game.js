@@ -15,7 +15,10 @@ $(function(){
         "cheater",
         "pootis",
         "spy",
-        "onii"
+        "onii",
+        "mongol",
+        "peron",
+        "ali"
     ];
     const rnam_second = [
         "destroyer",
@@ -28,7 +31,10 @@ $(function(){
         "sucker",
         "builder",
         "chan",
-        "sapper"
+        "sapper",
+        "corrupter",
+        "uwuer",
+        "player"
     ];
     const rnam_third = [
         "696",
@@ -43,7 +49,8 @@ $(function(){
         "080",
         "000",
         "021",
-        "420"
+        "420",
+        "111"
     ]
     var socket = io.connect();
     var randomnameone = rnam_first[Math.floor(Math.random() * rnam_first.length)];

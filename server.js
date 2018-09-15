@@ -4,7 +4,6 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
-
 var app = express();
 var server = http.Server(app);
 var io = socketIO(server);
@@ -17,26 +16,23 @@ app.get('/', function(request, response) {
     app.use(express.static(path.join(__dirname, 'static')));
 });
 
-// Starts the server.
 server.listen(3000, function() {
     console.log('Starting server on port 3000');
 });
 
-
 io.on('connection', function(socket) {
     console.log("new connection from " + socket.ip);
+
     socket.on('disconnect', function(data) {
         console.log('Disconected: s sockets connected');
         playerlist.splice(playerlist.indexOf(socket.username), 1);
         updateUsernames();
     });
 
-
     socket.on('algo', function(data) {
         if(data=="algo") {
         }
     });
-
 
     socket.on('new_player', function(data) {
 		//callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
@@ -46,7 +42,6 @@ io.on('connection', function(socket) {
             socket.disconnect();
             return;
         }
-
 		playerlist.push(socket.nickname);
         updateUsernames();
         console.log(playerlist.lenght);

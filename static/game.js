@@ -25,7 +25,8 @@ $(function(){
         "decaroli",
         "cora",
         "leaderman",
-        "lilita"
+        "lilita",
+        "gucchi"
     ];
     const rnam_second = [
         "destroyer",
@@ -46,7 +47,8 @@ $(function(){
         "thepro",
         "volleyballkicker",
         "passtheball",
-        "carrió"
+        "carrió",
+        "ganger"
     ];
     const rnam_third = [
         "696",

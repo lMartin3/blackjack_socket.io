@@ -52,9 +52,26 @@ io.on('connection', function(socket) {
         if(playerlist.length > 1) {
             console.log("hooorayy");
             var cdt = 20;
-            updateStatus("Starting... " + cdt + " seconds left!");
-        }
-    });
+            var now = new Date().getTime();
+            var countDownDate = new Date(Date.getTime() + 20*1000);
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+                // Time calculations for days, hours, minutes and seconds
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Display the result in the element with id="demo"
+                // If the count down is finished, write some text 
+                
+                if (distance < 0) {
+                    clearInterval(x);
+                }
+                cdt = distance;
+                updateStatus("Starting... " + cdt + " seconds left!");
+                
+        });
+    }
+});
     function updateStatus(status) {
         io.sockets.emit('update_status', status);
     }

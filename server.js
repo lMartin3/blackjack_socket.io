@@ -27,9 +27,9 @@ io.on('connection', function(socket) {
         updateUsernames();
     });
 
-    socket.on('new_player', function(data) {
+    socket.on('new_player', function(data, callback) {
         socket.emit('log', "Bienvenido");
-		//callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
+		callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
         socket.nickname = data;
         if(data=="sandra") {
             socket.emit('reject', "Game in progress");

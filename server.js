@@ -1,4 +1,4 @@
-//blackjack-socket.io coded by lMartin3
+//blackjack-socket.io coded by lMartin3 and MQRLZ
 //SERVERSIDe
 const express = require('express');
 const http = require('http');

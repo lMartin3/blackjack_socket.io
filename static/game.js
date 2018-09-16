@@ -34,7 +34,12 @@ $(function(){
         "lilita",
         "gucchi",
         "lucía",
-        "lección"
+        "lección",
+        "a_nisman_lo_mataron",
+        "macri",
+        "macrisis",
+        "cristina",
+        "ese_del_sindicato_de_camioneros"
     ];
     const rnam_second = [
         "destroyer",

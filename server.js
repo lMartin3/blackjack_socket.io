@@ -24,10 +24,14 @@ server.listen(3000, function() {
 io.on('connection', function(socket) {
     //console.log("new connection from " + socket.ip);
     socket.on('disconnect', function(data) {
-        playerlist.splice(playerlist.indexOf(socket.nickname), 1);
-        updateUsernames();
+        for(i = 0;i < playerlist.length;i++) {
+            if(playerlist[i]==socket.nickname) {
+                playerlist.splice(i, 1);
+            }
+        }
     });
-
+    updateUsernames();
+    
     socket.on('new_player', function(data, callback) {
         socket.emit('log', "Bienvenido");
 		callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
@@ -39,12 +43,16 @@ io.on('connection', function(socket) {
         }
         playerlist.push(socket.nickname);
         updateUsernames();
-        if(bj_status!="starting") {
+        if(bj_status!="starting" && bj_status!="ingame") {
+            console.log(bj_status);
             if(playerlist.length > 1) {
                 startCooldown();
             }   
         } else {
             console.log("already starting");
+            if(bj_status=="ingame") {
+                updateStatus("In game");
+            }
         }
     });
 

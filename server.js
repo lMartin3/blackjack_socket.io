@@ -36,7 +36,6 @@ io.on('connection', function(socket) {
         socket.emit('log', "Bienvenido");
 		callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
         socket.nickname = data;
-        data = "sandra"
         if(data=="sandra") {
             socket.emit('reject', "Game in progress");
             socket.disconnect();

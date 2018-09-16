@@ -14,8 +14,8 @@ bj_round = 0;
 bj_turn = "";
 bj_played = false;
 bj_cards = [
-    "as_pica",
     "2_pica",
+    "as_pica",
     "3_pica",
     "4_pica",
     "5_pica",
@@ -75,14 +75,59 @@ io.on('connection', function(socket) {
                     startCooldown();
                 }   
             } else {
-                console.log("already starting");
                 if(bj_status=="ingame") {
                     updateStatus("In game");
                 }
             }
         }
     });
+    socket.on('ask_for_card', function() {
+        if(socket.nickname==bj_turn) {
+            if(!socket.cards) {
+                socket.cards = [];
+            }
+            giveCard(socket);
+            bj_turn = "";
+            bj_played = true;
+        }
+    });
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
 
+    function giveCard(socket) {
+        var selectedcard = bj_cards[Math.floor(Math.random()*bj_cards.length)];
+        for(i=0;i<bj_cards.length;i++) {
+            if(bj_cards[i]==selectedcard) {
+                bj_cards.splice(i, 1);
+            }
+        }
+        socket.cards.push(selectedcard);
+        socket.emit('got_card', socket.cards);
+        console.log("'S SCORE = " + getScore(socket.cards));
+    }
+    function getScore(cards) {
+        var lc = [];
+        for(i=0;i<cards.length;i++) {
+            lc.push(cards[i]);
+        }
+        var score = 0;
+        for(ii=0,ii<lc.length;ii++) {
+            lc[i].replace("_pica", "");
+            lc[i].replace("jack", "10");
+            lc[i].replace("queen", "10");
+            lc[i].replace("king", "10");
+            score += lc[i];
+        }
+        return score;
+    }
     function updateStatus(status) {
         console.log("Sending status update: " + status);
         io.sockets.emit('update_status', status);
@@ -104,23 +149,15 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_turn', turnof, time);
     }
     function sturn(list) {
-        console.log("LLL" + list.length);
-        console.log(list);
-        if(!list) {
-            console.log("onno")
-        }
         if(list.length==0) {
             gameplay();
             
         } else {
-            console.log(list.length);
             clearInterval(i);
             bj_turn = list[0];
             bj_played = false;
             turntime = 7;
-            console.log("Listbefore: " + list);
             list.shift();
-            console.log("Listafter: " + list);
             var i = setInterval(function() {
                 if(turntime<=0) {
                     clearInterval(i);

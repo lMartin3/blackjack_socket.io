@@ -8,6 +8,8 @@ $(function(){
     var $controls = $('#controls');
     var $round = $('#round');
     var $turn = $('#turn');
+    var $cards = $('#cards');
+    var $cardlist = $('#cardlist');
     
     const rnam_first =[
         "potato",
@@ -101,7 +103,10 @@ $(function(){
             }
         })
     });
-
+    document.getElementById("askforcard").addEventListener("click", function(){
+        console.log("asking for card");
+        socket.emit('ask_for_card');
+    });
     socket.on('reject', function(data) {
         console.log("lol u rejected");
         alert("Kicked by Server System" +  "\nReason: " + data);
@@ -127,8 +132,8 @@ $(function(){
     })
     socket.on('update_status', function(data) {
         console.log("Satuts update: " + data)
-        var html = 'Status: ' + data;
-        $status.html(html);
+        var suhtml = 'Status: ' + data;
+        $status.html(suhtml);
     })
     socket.on('start_game', function() {
         var audio = new Audio('audio_background.mp3');
@@ -136,11 +141,18 @@ $(function(){
         $controls.show();
     })
     socket.on('update_round', function(data) {
-        html = 'Round ' + data;
-        $round.html(html);
+        urhtml = 'Round ' + data;
+        $round.html(urhtml);
     })
     socket.on('update_turn', function(turnof, time) {
-        html = turnof + "'s turn " + "(" + time + ")";
-        $turn.html(html);
+        uthtml = turnof + "'s turn " + "(" + time + ")";
+        $turn.html(uthtml);
+    })
+    socket.on('got_card', function(data) {
+        var chtml='';
+        for(i=0;i<data.length;i++) {
+            chtml += '<img height="135" width="90" src="' + data[i] +'.png"></img>';
+        }
+        $cardlist.html(chtml);
     })
 });

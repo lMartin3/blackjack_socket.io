@@ -82,10 +82,31 @@ h1 {
 .pltabme:hover {
     font-size: 1.3em;
 }
+.cbtn {
+  position: relative;
+  bottom: 0px;
+  transition: bottom 0.25s;
+  background: none;
+  border: none;
 
+}
+.cbtn:hover {
+  bottom: 30px;
+}
 
-
-
+.round {
+  text-align: center;
+}
+.turn {
+  text-align: center;
+}
+.card {
+  height: 135;
+  width: 90;
+}
+.cardlist {
+  text-align: center;
+}
 
 
 

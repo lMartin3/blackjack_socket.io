@@ -119,7 +119,7 @@ io.on('connection', function(socket) {
             lc.push(cards[i]);
         }
         var score = 0;
-        for(ii=0,ii<lc.length;ii++) {
+        for(ii=0,ii<lc.length;ii++;) {
             lc[i].replace("_pica", "");
             lc[i].replace("jack", "10");
             lc[i].replace("queen", "10");

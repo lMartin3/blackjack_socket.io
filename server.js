@@ -106,6 +106,7 @@ io.on('connection', function(socket) {
         console.log("Listafter: " + list);
         var i = setInterval(function() {
             if(turntime<=0) {
+                clearInterval(i);
                 sturn(list);
             }
             if(bj_played==false) {
@@ -113,6 +114,7 @@ io.on('connection', function(socket) {
                 turntime --;
                 
             } else {
+                clearInterval(i);
                 sturn(list);
             }
 

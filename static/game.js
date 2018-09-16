@@ -5,6 +5,7 @@ $(function(){
     var $players = $('#players');
     var $ou = $('#ou');
     var $status = $('#status');
+    var $controls = $('#controls');
     
     const rnam_first =[
         "potato",
@@ -76,6 +77,7 @@ $(function(){
         "111"
     ]
     $gameform.hide();
+    $controls.hide();
     var randomnameone = rnam_first[Math.floor(Math.random() * rnam_first.length)];
     var randomnametwo = rnam_second[Math.floor(Math.random() * rnam_second.length)];
     var randomnamethree = rnam_third[Math.floor(Math.random() * rnam_third.length)];
@@ -88,7 +90,7 @@ $(function(){
             if(data){
                 $loginform.hide();
                 $gameform.show();
-                $username.val('');
+                $controls.hide();
             }
         })
     });
@@ -101,7 +103,11 @@ $(function(){
         console.log("Refreshing players...")
         var html = '';
         for(i = 0;i < data.length;i++) {
-            html += '<li class="list-group-item">'+data[i]+'</li>';
+            if(data[i]==$username.val()) {
+                html += '<li class="pltabme" id="'+ data[i] +'">'+data[i]+'</li>';
+            } else {
+                html += '<li class="pltab" id="'+ data[i] +'">'+data[i]+'</li>';    
+            }
         }
         $players.html(html);
         ouhtml = i+' Players online';
@@ -116,6 +122,8 @@ $(function(){
         $status.html(html);
     })
     socket.on('start_game', function() {
-        console.log("Che esto funcionó re bien");
+        var audio = new Audio('audio_background.mp3');
+        audio.play();        
+        $controls.show();
     })
 });

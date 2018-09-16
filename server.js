@@ -14,6 +14,7 @@ bj_status = "waiting"; //waiting, cooldown, ingame, finishing
 app.get('/', function(request, response) {
     response.sendFile(path.join(__dirname, '/static/', 'index.html'));
     app.use(express.static(path.join(__dirname, 'static')));
+    app.use(express.static(path.join(__dirname, 'static/assets')));
 });
 
 server.listen(3000, function() {
@@ -38,8 +39,12 @@ io.on('connection', function(socket) {
         }
         playerlist.push(socket.nickname);
         updateUsernames();
-        if(playerlist.length > 1) {
-            startCooldown();
+        if(bj_status!="starting") {
+            if(playerlist.length > 1) {
+                startCooldown();
+            }   
+        } else {
+            console.log("already starting");
         }
     });
 

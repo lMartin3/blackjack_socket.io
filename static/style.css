@@ -57,12 +57,31 @@ h1 {
     font-size: 1em;
     height: 80px
 }
-
-
-
-
-
-
+.controls {
+    width: 20%;
+    height: 10%;
+    margin: auto;
+    vertical-align: auto;
+    background-color: #f0f0f0; /*#e5e5dc; */
+    border: 10px #000000;
+    margin: 10px auto;
+    position: relative;
+    text-align: center;
+}
+.pltab {
+    font-size: 0.8em;
+    transition: font-size 0.5s;
+}
+.pltabme {
+    font-size: 1.1em;
+    transition: font-size 0.5s;
+}
+.pltab:hover {
+    font-size: 1em;
+}
+.pltabme:hover {
+    font-size: 1.3em;
+}
 
 
 

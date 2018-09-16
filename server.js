@@ -10,6 +10,22 @@ var io = socketIO(server);
 
 var playerlist = [];
 bj_status = "waiting"; //waiting, cooldown, ingame, finishing
+bj_round = 0;
+bj_cards = [
+    "as_pica",
+    "2_pica",
+    "3_pica",
+    "4_pica",
+    "5_pica",
+    "6_pica",
+    "7_pica",
+    "8_pica",
+    "9_pica",
+    "10_pica",
+    "jack_pica",
+    "queen_pica",
+    "king_pica"
+]
 
 app.get('/', function(request, response) {
     response.sendFile(path.join(__dirname, '/static/', 'index.html'));
@@ -33,10 +49,12 @@ io.on('connection', function(socket) {
     updateUsernames();
     
     socket.on('new_player', function(data, callback) {
+        data = data.replace("<", "&lt");
+        data = data.replace(">", "&gt");
         socket.emit('log', "Bienvenido");
 		callback(true); // PARA LLAMAR FUNCION Y REEMITIR PAQUETE - functin(data, callback) {}
         socket.nickname = data;
-        if(data=="sandra") {
+        if(bj_status=="ingame") {
             socket.emit('reject', "Game in progress");
             socket.disconnect();
             return;
@@ -68,9 +86,30 @@ io.on('connection', function(socket) {
     }
     function startgame() {
         io.sockets.emit('start_game');
+        gameplay();
     }    
+    function updateRound(data) {
+        io.sockets.emit('update_round', data)
+    }
+    function gameplay() {
+        if(bj_round==0) {
+            bj_round = 1;
+            updateRound(bj_round);
+            var altpl = playerlist;
+            for(i=0;i<playerlist.length;i++) {
+
+            }
+        } else {
+            bj_round++;
+            updateRound(bj_round);
+
+        }
+    }
 
     function startCooldown() {
+        if(bj_status=="ingame"||bj_status=="starting") {
+            return;
+        }
         bj_status = "starting";
         var cdt = 20;
         var x = setInterval(function() {

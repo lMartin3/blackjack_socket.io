@@ -6,6 +6,7 @@ $(function(){
     var $ou = $('#ou');
     var $status = $('#status');
     var $controls = $('#controls');
+    var $round = $('#round');
     
     const rnam_first =[
         "potato",
@@ -103,12 +104,14 @@ $(function(){
     socket.on('reject', function(data) {
         console.log("lol u rejected");
         alert("Kicked by Server System" +  "\nReason: " + data);
+        window.location.reload();
     });
     socket.on('refresh_players', function(data){
         console.log("Refreshing players...")
         var html = '';
         for(i = 0;i < data.length;i++) {
             if(data[i]==$username.val()) {
+                
                 html += '<li class="pltabme" id="'+ data[i] +'">'+data[i]+'</li>';
             } else {
                 html += '<li class="pltab" id="'+ data[i] +'">'+data[i]+'</li>';    
@@ -130,5 +133,9 @@ $(function(){
         var audio = new Audio('audio_background.mp3');
         audio.play();        
         $controls.show();
+    })
+    socket.on('update_round', function(data) {
+        html = 'Round ' + data;
+        $round.html(html);
     })
 });

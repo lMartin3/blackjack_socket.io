@@ -142,12 +142,18 @@ io.on('connection', function(socket) {
         if(bj_round==0) {
             bj_round = 1;
             updateRound(bj_round);
-            altpl = playerlist;
+            var altpl = []
+            for(i=0;i<playerlist.length;i++) {
+                altpl.push(playerlist[i]);
+            }
             sturn(altpl);
         } else {
             bj_round++;
             updateRound(bj_round);
-            altpl = playerlist;
+            var altpl = []
+            for(i=0;i<playerlist.length;i++) {
+                altpl.push(playerlist[i]);
+            }
             sturn(altpl);
 
 

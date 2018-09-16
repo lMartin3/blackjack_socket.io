@@ -104,7 +104,7 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_turn', turnof, time);
     }
     function sturn(list) {
-        if(!list[0]) {
+        if(!bj_status) {
             gameplay();
             
         } else {

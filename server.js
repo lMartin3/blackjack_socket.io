@@ -97,6 +97,11 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_turn', turnof, time);
     }
     function sturn(list) {
+        if(list.length <= 0) {
+            gameplay();
+            return;
+        }
+        console.log(list.length);
         clearInterval(i);
         bj_turn = list[0];
         bj_played = false;
@@ -129,6 +134,9 @@ io.on('connection', function(socket) {
         } else {
             bj_round++;
             updateRound(bj_round);
+            var altpl = playerlist;
+            sturn(altpl);
+
 
         }
     }

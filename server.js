@@ -104,7 +104,12 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_turn', turnof, time);
     }
     function sturn(list) {
-        if(!bj_status) {
+        console.log("LLL" + list.length);
+        console.log(list);
+        if(!list) {
+            console.log("onno")
+        }
+        if(list.length==0) {
             gameplay();
             
         } else {
@@ -137,12 +142,12 @@ io.on('connection', function(socket) {
         if(bj_round==0) {
             bj_round = 1;
             updateRound(bj_round);
-            var altpl = playerlist;
+            altpl = playerlist;
             sturn(altpl);
         } else {
             bj_round++;
             updateRound(bj_round);
-            var altpl = playerlist;
+            altpl = playerlist;
             sturn(altpl);
 
 

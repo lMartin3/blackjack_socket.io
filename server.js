@@ -52,8 +52,9 @@ io.on('connection', function(socket) {
                 playerlist.splice(i, 1);
             }
         }
-    });
     updateUsernames();
+        
+    });
     
     socket.on('new_player', function(data, callback) {
         data = data.replace("<", "&lt");
@@ -103,33 +104,34 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_turn', turnof, time);
     }
     function sturn(list) {
-        if(list.length <= 0) {
+        if(!list[0]) {
             gameplay();
-            return;
+            
+        } else {
+            console.log(list.length);
+            clearInterval(i);
+            bj_turn = list[0];
+            bj_played = false;
+            turntime = 7;
+            console.log("Listbefore: " + list);
+            list.shift();
+            console.log("Listafter: " + list);
+            var i = setInterval(function() {
+                if(turntime<=0) {
+                    clearInterval(i);
+                    sturn(list);
+                }
+                if(bj_played==false) {
+                    updateTurn(bj_turn, turntime);
+                    turntime --;
+                    
+                } else {
+                    clearInterval(i);
+                    sturn(list);
+                }
+    
+            }, 1000);
         }
-        console.log(list.length);
-        clearInterval(i);
-        bj_turn = list[0];
-        bj_played = false;
-        turntime = 15;
-        console.log("Listbefore: " + list);
-        list.shift();
-        console.log("Listafter: " + list);
-        var i = setInterval(function() {
-            if(turntime<=0) {
-                clearInterval(i);
-                sturn(list);
-            }
-            if(bj_played==false) {
-                updateTurn(bj_turn, turntime);
-                turntime --;
-                
-            } else {
-                clearInterval(i);
-                sturn(list);
-            }
-
-        }, 1000);
     }
     function gameplay() {
         if(bj_round==0) {

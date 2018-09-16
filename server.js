@@ -40,6 +40,11 @@ server.listen(3000, function() {
 });
 
 io.on('connection', function(socket) {
+    if(bj_status=="ingame") {
+        socket.emit('reject', "Game in progress");
+        socket.disconnect();
+        return;
+    }
     //console.log("new connection from " + socket.ip);
     socket.on('disconnect', function(data) {
         for(i = 0;i < playerlist.length;i++) {
@@ -60,18 +65,19 @@ io.on('connection', function(socket) {
             socket.emit('reject', "Game in progress");
             socket.disconnect();
             return;
-        }
-        playerlist.push(socket.nickname);
-        updateUsernames();
-        if(bj_status!="starting" && bj_status!="ingame") {
-            console.log(bj_status);
-            if(playerlist.length > 1) {
-                startCooldown();
-            }   
         } else {
-            console.log("already starting");
-            if(bj_status=="ingame") {
-                updateStatus("In game");
+            playerlist.push(socket.nickname);
+            updateUsernames();
+            if(bj_status!="starting" && bj_status!="ingame") {
+                console.log(bj_status);
+                if(playerlist.length > 1) {
+                    startCooldown();
+                }   
+            } else {
+                console.log("already starting");
+                if(bj_status=="ingame") {
+                    updateStatus("In game");
+                }
             }
         }
     });

@@ -11,6 +11,8 @@ var io = socketIO(server);
 var playerlist = [];
 bj_status = "waiting"; //waiting, cooldown, ingame, finishing
 bj_round = 0;
+bj_turn = "";
+bj_played = false;
 bj_cards = [
     "as_pica",
     "2_pica",
@@ -91,14 +93,37 @@ io.on('connection', function(socket) {
     function updateRound(data) {
         io.sockets.emit('update_round', data)
     }
+    function updateTurn(turnof, time) {
+        io.sockets.emit('update_turn', turnof, time);
+    }
+    function sturn(list) {
+        clearInterval(i);
+        bj_turn = list[0];
+        bj_played = false;
+        turntime = 15;
+        console.log("Listbefore: " + list);
+        list.shift();
+        console.log("Listafter: " + list);
+        var i = setInterval(function() {
+            if(turntime<=0) {
+                sturn(list);
+            }
+            if(bj_played==false) {
+                updateTurn(bj_turn, turntime);
+                turntime --;
+                
+            } else {
+                sturn(list);
+            }
+
+        }, 1000);
+    }
     function gameplay() {
         if(bj_round==0) {
             bj_round = 1;
             updateRound(bj_round);
             var altpl = playerlist;
-            for(i=0;i<playerlist.length;i++) {
-
-            }
+            sturn(altpl);
         } else {
             bj_round++;
             updateRound(bj_round);
@@ -111,7 +136,7 @@ io.on('connection', function(socket) {
             return;
         }
         bj_status = "starting";
-        var cdt = 20;
+        var cdt = 10;
         var x = setInterval(function() {
             if(playerlist.length>1) {
                 updateStatus("Starting... " + "[" + cdt + "]");

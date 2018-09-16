@@ -7,6 +7,7 @@ $(function(){
     var $status = $('#status');
     var $controls = $('#controls');
     var $round = $('#round');
+    var $turn = $('#turn');
     
     const rnam_first =[
         "potato",
@@ -137,5 +138,9 @@ $(function(){
     socket.on('update_round', function(data) {
         html = 'Round ' + data;
         $round.html(html);
+    })
+    socket.on('update_turn', function(turnof, time) {
+        html = turnof + "'s turn " + "(" + time + ")";
+        $turn.html(html);
     })
 });

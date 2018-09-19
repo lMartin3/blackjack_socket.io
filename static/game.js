@@ -10,7 +10,9 @@ $(function(){
     var $turn = $('#turn');
     var $cards = $('#cards');
     var $cardlist = $('#cardlist');
-    
+
+    var pong = false;
+
     const rnam_first =[
         "potato",
         "earth",
@@ -85,6 +87,8 @@ $(function(){
         "420",
         "111"
     ]
+    
+    
     $gameform.hide();
     $controls.hide();
     var randomnameone = rnam_first[Math.floor(Math.random() * rnam_first.length)];
@@ -93,6 +97,10 @@ $(function(){
     var rname = randomnameone + "_" + randomnametwo + "_" + randomnamethree;
     $username.val(rname);
     var socket = io.connect();
+
+
+
+    
     document.getElementById("joinGame").addEventListener("click", function(){
         console.log($username.val());
         socket.emit('new_player', $username.val(), function(data) {
@@ -155,4 +163,30 @@ $(function(){
         }
         $cardlist.html(chtml);
     })
+
+
+
+
+
+
+    function ping() {
+        var d = new Date();
+        socket.emit('cct', d);
+        console.log("PING! " + d);
+    }
+    socket.on('scr', function() {
+        console.log("PONG!");
+        pong = true;
+    })
+    
+    pingiv = setInterval(function(){
+        ping();
+        setTimeout(function(){
+            if(pong!=true) {
+                Alert.error('Connection lost');
+            }
+            pong=false;
+        }, 3000)
+    }, 5000);
+    
 });

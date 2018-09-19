@@ -5,9 +5,10 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="alerts.js"></script> <!-- MUST LOAD BERFORE GAME.JS AND AFTER JQUERY AND SOCKET.IO-->
     <script src="game.js"></script>
 </head>
-<body>
+<body id="body">
         <h1>Blackjack!</h1><br>
         
     <div class="container login" id="loginform">
@@ -24,6 +25,7 @@
             <ul id="players" class="playerboard">
         </div>
         <div class="controls" id="controls">
+                <a href="#" onclick="Alert.warning('Message','Meh')">Warning Alert</a>
                 <h4 id="round">Round 0</h4><br>
                 <h4 id="turn">Unknown's turn</h4>
                 <div id="cards">

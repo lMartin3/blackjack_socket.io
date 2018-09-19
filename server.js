@@ -52,9 +52,10 @@ io.on('connection', function(socket) {
                 playerlist.splice(i, 1);
             }
         }
-    updateUsernames();
+        updateUsernames();
         
     });
+
     
     socket.on('new_player', function(data, callback) {
         data = data.replace("<", "&lt");
@@ -91,6 +92,18 @@ io.on('connection', function(socket) {
             bj_played = true;
         }
     });
+
+    // CLIENT CONNECTION TEST
+    socket.on('cct', function(cd) {
+        console.log("PING RECIEVED");
+        var sd = new Date();
+       var difference = sd.getTime() - ct.getTime();
+        console.log("dif:" + difference);
+        // SERVER CONNECTION RESPONSE
+        socket.emit('scr');
+    });
+
+
     function shuffle(a) {
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
@@ -116,16 +129,24 @@ io.on('connection', function(socket) {
     function getScore(cards) {
         var lc = [];
         for(i=0;i<cards.length;i++) {
+            console.log("FI" + i);
             lc.push(cards[i]);
         }
+        console.log(lc.length + "LC" + lc + " AND CARDS " + cards);
         var score = 0;
-        for(ii=0,ii<lc.length;ii++;) {
-            lc[i].replace("_pica", "");
-            lc[i].replace("jack", "10");
-            lc[i].replace("queen", "10");
-            lc[i].replace("king", "10");
-            score += lc[i];
+        
+        for(i=0;i<lc.length;i++) {
+            r = String(lc[i]);
+            r = r.replace("_pica", "");
+            r = r.replace("jack", "10");
+            r = r.replace("queen", "10");
+            r = r.replace("king", "10");
+            r = parseInt(r);
+            score = score + r;
+            console.log("TEMPSCORE= " + score);
+            console.log("LCI= " + r);
         }
+        console.log("FINALSCORE= "+ score);
         return score;
     }
     function updateStatus(status) {

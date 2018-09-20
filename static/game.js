@@ -12,6 +12,7 @@ $(function(){
     var $cardlist = $('#cardlist');
 
     var pong = false;
+    var firstcon = false;
 
     const rnam_first =[
         "potato",
@@ -171,22 +172,36 @@ $(function(){
 
     function ping() {
         var d = new Date();
-        socket.emit('cct', d);
+        socket.emit('cct', d.getTime());
         console.log("PING! " + d);
     }
-    socket.on('scr', function() {
-        console.log("PONG!");
-        pong = true;
-    })
-    
-    pingiv = setInterval(function(){
+    function pif() {
         ping();
         setTimeout(function(){
             if(pong!=true) {
-                Alert.error('Connection lost');
+                Alert.error('No response from server', 'Connection error', {displayDuration: 0});
+            } else {
+                if(firstcon==false) {
+                    Alert.success('You have established connection with the server', 'Connection successful!');
+                    firstcon = true;
+                }
             }
             pong=false;
         }, 3000)
+    }
+    
+    socket.on('scr', function(dif) {
+        console.log("PONG! ms:"+dif);
+        pong = true;
+    })
+    pif();
+    
+    
+    pingiv = setInterval(function(){
+        pif();
     }, 5000);
     
+});
+$( document ).ready(function() {
+    Alert.info('Connecting to server...', 'Welcome!', {displayDuration: 4000});
 });

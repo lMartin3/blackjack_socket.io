@@ -37,6 +37,7 @@ app.get('/', function(request, response) {
 
 server.listen(3000, function() {
     console.log('Starting server on port 3000');
+    
 });
 
 io.on('connection', function(socket) {
@@ -94,17 +95,17 @@ io.on('connection', function(socket) {
     });
 
     // CLIENT CONNECTION TEST
-    socket.on('cct', function(cd) {
+    socket.on('cct', function(ct) {
         console.log("PING RECIEVED");
         var sd = new Date();
-       var difference = sd.getTime() - ct.getTime();
+        var difference = sd.getTime() - ct
         console.log("dif:" + difference);
         // SERVER CONNECTION RESPONSE
-        socket.emit('scr');
+        socket.emit('scr', difference);
     });
 
 
-    function shuffle(a) {
+    function shuffle(a) { // DO NOT USE IT IS BROKEN
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));
@@ -125,6 +126,7 @@ io.on('connection', function(socket) {
         socket.cards.push(selectedcard);
         socket.emit('got_card', socket.cards);
         console.log("'S SCORE = " + getScore(socket.cards));
+        updateScore(turnof, getScore(socket.cards));
     }
     function getScore(cards) {
         var lc = [];
@@ -168,6 +170,9 @@ io.on('connection', function(socket) {
     }
     function updateTurn(turnof, time) {
         io.sockets.emit('update_turn', turnof, time);
+    }
+    function updateScore(player, score) {
+        io.sockets.emit('update_score', player, score)
     }
     function sturn(list) {
         if(list.length==0) {

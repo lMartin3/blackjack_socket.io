@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
+@import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
 body {
     font-family: 'Anonymous Pro', monospace;
     font-size: 1.5em;
@@ -107,6 +108,35 @@ h1 {
 .cardlist {
   text-align: center;
 }
+
+
+
+
+
+/* Font awesome*/
+.fa-2x {
+  font-size: 2em;
+}
+.fas {
+  font-size: 0.5em;
+  
+}
+.ali {
+  font-size: 0.9em;
+}
+.aem {
+  font-size: 0.6em;
+}
+
+
+
+
+
+
+
+
+
+
 
 /*Alertas*/
 

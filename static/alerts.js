@@ -9,7 +9,7 @@ var Alert = undefined;
     return alert("warning", message, title, "icon-warning-sign", options);
   };
   error = function(message, title, options) {
-    return alert("error", message, title, "icon-minus-sign", options);
+    return alert("error", message, title, "fas fa-times", options);
   };
   success = function(message, title, options) {
     return alert("success", message, title, "icon-ok-sign", options);
@@ -31,7 +31,7 @@ var Alert = undefined;
         width: options.width
       });
     }
-      alertElem = $("<li>").addClass("alert").addClass("alert-" + type);
+      alertElem = $("<li class='ali'>").addClass("alert").addClass("alert-" + type);
       setTimeout(function() {
          alertElem.addClass('open');
       }, 1);
@@ -54,7 +54,7 @@ var Alert = undefined;
         leave();
       }), options.displayDuration);
     } else {
-      innerElem.append("<em>Click to Dismiss</em>");
+      innerElem.append("<em class='aem'>Click to Dismiss</em>");
     }
     alertElem.on("click", function() {
       leave();
@@ -85,6 +85,3 @@ this.Alert = Alert;
 $('#test').on('click', function() {
   Alert.info('Message');
   });
-  $( document ).ready(function() {
-    Alert.info('Message!');
-});

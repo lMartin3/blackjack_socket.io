@@ -105,7 +105,7 @@ io.on('connection', function(socket) {
     });
 
 
-    function shuffle(a) { // DO NOT USE IT IS BROKEN
+    function shuffle(a) { // DO NOT USE 
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));

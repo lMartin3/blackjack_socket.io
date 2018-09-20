@@ -164,7 +164,9 @@ $(function(){
         }
         $cardlist.html(chtml);
     })
-
+    socket.on('update_score', function() {
+        
+    })
 
 
 

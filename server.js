@@ -126,7 +126,7 @@ io.on('connection', function(socket) {
         socket.cards.push(selectedcard);
         socket.emit('got_card', socket.cards);
         console.log("'S SCORE = " + getScore(socket.cards));
-        updateScore(turnof, getScore(socket.cards));
+        updateScore(bj_turn, getScore(socket.cards));
     }
     function getScore(cards) {
         var lc = [];
@@ -191,6 +191,7 @@ io.on('connection', function(socket) {
                 }
                 if(bj_played==false) {
                     updateTurn(bj_turn, turntime);
+                    
                     turntime --;
                     
                 } else {

@@ -84,9 +84,10 @@ io.on('connection', function(socket) {
         }
     });
     socket.on('ask_for_card', function() {
-        for(i=0;i<playerlist.length;i++) {
-            if(socket.)
-        }
+        if(socket.nickname==bj_turn) {
+            if(!socket.cards) {
+                socket.cards = [];
+            }
             giveCard(socket);
             bj_turn = "";
             bj_played = true;
@@ -122,17 +123,11 @@ io.on('connection', function(socket) {
                 bj_cards.splice(i, 1);
             }
         }
-        var nickname="";
-        for(x=0;x<playerlist.length;x++) {
-            if(playerlist[x]==socket.nickname) {
-                playerlist[x].cards.push(selectedcard);
-                socket.emit('got_card', playerlist[x].cards);
-                console.log("'S SCORE = " + getScore(playerlist[x].cards));
-                updateScore(bj_turn, getScore(playerlist[x].cards));
-            }
-        }
+        socket.cards.push(selectedcard);
+        socket.emit('got_card', socket.cards);
+        console.log("'S SCORE = " + getScore(socket.cards));
+        updateScore(turnof, getScore(socket.cards));
     }
-
     function getScore(cards) {
         var lc = [];
         for(i=0;i<cards.length;i++) {
@@ -161,8 +156,7 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_status', status);
     }
 	function updateUsernames() {
-        io.sockets.emit('refresh_players', playerlist);
-        
+		io.sockets.emit('refresh_players', playerlist);
     }
     function plzLog(data) {
         io.sockets.emit('log', data);
@@ -177,8 +171,8 @@ io.on('connection', function(socket) {
     function updateTurn(turnof, time) {
         io.sockets.emit('update_turn', turnof, time);
     }
-    function updateScore() {
-        io.sockets.emit('update_score')
+    function updateScore(player, score) {
+        io.sockets.emit('update_score', player, score)
     }
     function sturn(list) {
         if(list.length==0) {

@@ -85,12 +85,11 @@ io.on('connection', function(socket) {
     });
     socket.on('ask_for_card', function() {
         for(i=0;i<playerlist.length;i++) {
-            if(socket.)
+           
         }
-            giveCard(socket);
-            bj_turn = "";
-            bj_played = true;
-        }
+        giveCard(socket);
+        bj_turn = "";
+        bj_played = true;
     });
 
     // CLIENT CONNECTION TEST

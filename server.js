@@ -176,6 +176,10 @@ io.on('connection', function(socket) {
     }
     function sturn(list) {
         if(list.length==0) {
+            if(playerlist.length<=0) {
+                //STOP
+                console.log("Not enough players to continue, shutting down...");
+            }
             gameplay();
             
         } else {

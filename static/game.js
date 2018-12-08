@@ -126,7 +126,7 @@ $(function(){
         var html = '';
         for(i = 0;i < data.length;i++) {
             if(data[i]==$username.val()) {  
-                html += '<li class="pltabme" id="'+ data[i] +'">'+data[i]+'</li>';
+                html += '<li class="pltab me" id="'+ data[i] +'">'+data[i]+'</li>';
             } else {
                 html += '<li class="pltab" id="'+ data[i] +'">'+data[i]+'</li>';    
             }

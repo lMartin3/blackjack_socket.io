@@ -9,6 +9,7 @@ var server = http.Server(app);
 var io = socketIO(server);
 
 var playerlist = [];
+var aliveplayers = [];
 bj_status = "waiting"; //waiting, cooldown, ingame, finishing
 bj_round = 0;
 bj_turn = "";
@@ -117,6 +118,10 @@ io.on('connection', function(socket) {
     }
 
     function giveCard(socket) {
+        //TEMPORAL FIX TEMP-FIX
+/*         if(getScore(socket)>=21) {
+            return;
+        } */
         var selectedcard = bj_cards[Math.floor(Math.random()*bj_cards.length)];
         for(i=0;i<bj_cards.length;i++) {
             if(bj_cards[i]==selectedcard) {
@@ -128,7 +133,7 @@ io.on('connection', function(socket) {
         console.log("'S SCORE = " + getScore(socket.cards));
         updateScore(bj_turn, getScore(socket.cards));
     }
-    function getScore(cards) {
+    function getScore(cards) { //Meant to be used with socket.cards
         var lc = [];
         for(i=0;i<cards.length;i++) {
             console.log("FI" + i);
@@ -172,7 +177,12 @@ io.on('connection', function(socket) {
         io.sockets.emit('update_turn', turnof, time);
     }
     function updateScore(player, score) {
-        io.sockets.emit('update_score', player, score)
+        io.sockets.emit('update_score', player, score);
+/*         if(score==21) {
+            aliveplayers.splice(aliveplayers.indexOf(player, 1));
+        } else if(score>21) {
+            aliveplayers.splice(aliveplayers.indexOf(player, 1));
+        } */
     }
     function sturn(list) {
         if(list.length==0) {
@@ -210,9 +220,13 @@ io.on('connection', function(socket) {
         if(bj_round==0) {
             bj_round = 1;
             updateRound(bj_round);
-            var altpl = []
+            var altpl = [];
+            aliveplayers = [];
             for(i=0;i<playerlist.length;i++) {
                 altpl.push(playerlist[i]);
+            }
+            for(i=0;i<playerlist.length;i++) {
+                aliveplayers.push(playerlist[i]);
             }
             sturn(altpl);
         } else {
@@ -220,7 +234,9 @@ io.on('connection', function(socket) {
             updateRound(bj_round);
             var altpl = []
             for(i=0;i<playerlist.length;i++) {
-                altpl.push(playerlist[i]);
+                if(aliveplayers.includes(playerlist[i])) {
+                    altpl.push(playerlist[i]);
+                }
             }
             sturn(altpl);
 
